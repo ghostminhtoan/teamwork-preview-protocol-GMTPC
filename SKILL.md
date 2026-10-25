@@ -4,12 +4,13 @@ description: >
   Universal Teamwork Preview & Multi-Role Review Protocol cho MỌI dự án và tech stack
   (Web, Backend, Mobile, CLI, Desktop, Systems, Microservices). Tối ưu hóa sâu theo kiến trúc
   Kỷ luật Kỹ thuật Nguyên lý Đầu tiên (First-Principles Engineering Rigor) kết hợp Claude-Style Extended Thinking:
-  cấu trúc thẻ XML ngữ nghĩa, Zero-Assumption Grounding Gate (diệt ảo giác code), Project Memory Recall & Cross-Machine
+  cấu trúc thẻ XML ngữ nghĩa, Zero-Assumption Grounding Gate (diệt trừ ảo giác code), Project Memory Recall & Cross-Machine
   Parity Guard (chống tái phạm lỗi đã fix đa máy/đa phiên), Anti-Oscillation Error Ledger (chống lặp lỗi sửa quẩn con lắc),
-  Extended Cognitive Scaffold (Chesterton's Fence, Self Red-Teaming, Mental Dry-Run), 3 Lăng kính Nhận thức (Adversarial,
-  YAGNI, Invariants), Complexity-Aware Adaptive Depth (Tier 1/2/3), Quantified Blast Radius, Deep Stack Profiles,
-  Explicit Staging Gate, Auto-Fix Circuit Breaker với 5 Whys Root-Cause, Canonical Few-Shot Examples và Hard Anti-Patterns.
-  Bắt buộc 0 Error/0 Warning trước khi commit local.
+  Hypothesis-Driven Scientific Debugging, Sister-Bug Horizontal Scanning, Atomic Operations & Crash-Resilience,
+  Code Chameleon & Architectural Inertia, Verification-First Scaffold, Rich Diagnostic Context, Context Budgeting,
+  Structured Disambiguation Matrix, Subagent Cognitive Offloading, Session Invariant Caching, 3 Lăng kính Nhận thức,
+  Adaptive Cognitive Depth (Tier 1/2/3), Auto-Fix Circuit Breaker với 5 Whys Root-Cause, Canonical Few-Shot Examples
+  và Hard Anti-Patterns. Bắt buộc 0 Error/0 Warning trước khi commit local.
   Trigger khi: "teamwork preview", "hội đồng review", "review code", "teamwork code",
   "đội ngũ review", "chia việc review", "multi-role review", "kiểm duyệt code", "code preview",
   "universal preview", "circuit breaker", "chống ảo giác", "chống lặp lỗi", "tái lặp lỗi".
@@ -17,24 +18,27 @@ description: >
 
 # Universal Teamwork Preview & Multi-Role Review Protocol 🚀
 
-Giao thức phối hợp kỹ thuật tự trị và kiểm định chất lượng cao dành cho **mọi ngôn ngữ lập trình, framework và quy mô dự án**. Được tối ưu hóa sâu để **triệt tiêu hoàn toàn ảo giác code (Zero Hallucination)**, **chống tái phạm lỗi đã fix qua các máy/phiên chat (Cross-Machine Regression Defense)**, và **chống sửa quẩn lặp lỗi tiêu tốn token (Anti-Oscillation Circuit Breaker)**.
+Giao thức phối hợp kỹ thuật tự trị và kiểm định chất lượng cao dành cho **mọi ngôn ngữ lập trình, framework và quy mô dự án**. Được tối ưu hóa sâu theo chuẩn mực nhận thức cao nhất của **Claude 3.7 Extended Thinking & Claude Code**: triệt tiêu 100% ảo giác code (**Zero Hallucination**), chống tái phạm lỗi đã fix qua nhiều máy/phiên chat (**Cross-Machine Regression Defense**), chống sửa quẩn lặp lỗi tiêu tốn token (**Anti-Oscillation Circuit Breaker**), bảo toàn tính nguyên tử chống sập dữ liệu (**Crash-Resilience**), và quét ngang diệt lỗi diện rộng (**Sister-Bug Scanning**).
 
 ---
 
 ## 0. CORE ENGINEERING DOGMA
 <core_dogma>
-### 1. Tối giản & Đúng trọng tâm (YAGNI & KISS)
+### 1. Tối giản & Đúng trọng tâm (YAGNI, KISS & Code Chameleon)
 - **Single Source of Truth (SSOT)**: Định vị chính xác 1–2 file nguồn gốc sự thật cần can thiệp. Tuyệt đối không tạo abstraction suy đoán trước khi thực sự cần.
 - **Tận dụng nền tảng (Native / Stdlib First)**: Luôn ưu tiên Standard Library và API có sẵn của ngôn ngữ/framework trước khi nghĩ đến việc kéo thêm package phụ thuộc (Zero unnecessary dependencies).
 - **Surgical Diff**: Chỉnh sửa cục bộ, đúng mục tiêu, giữ trọn vẹn phong cách code hiện hữu của dự án. Không bao giờ viết lại cả file nếu chỉ sửa vài dòng.
+- **Quy tắc Tắc kè hoa & Quán tính Kiến trúc (Code Chameleon & Architectural Inertia)**: Code mới sinh ra phải "vô hình" — hòa tan 100% vào ngữ điệu, quy ước đặt tên (PascalCase vs camelCase), cơ chế ném lỗi, cách tổ chức async và cấu trúc hàm của repo hiện tại.
 - **Nguyên tắc Hàng rào Chesterton (Chesterton's Fence)**: Trước khi xóa, sửa hoặc đơn giản hóa một đoạn code "kỳ lạ", AI bắt buộc phải trả lời: *"Tại sao tác giả trước lại viết như vậy? Họ đang phòng vệ lỗi biên nào?"*. Nếu chưa giải thích được lý do tồn tại thì **CẤM** xóa.
 
-### 2. Tiết kiệm Token & Đầu ra Tinh gọn (High-Signal Output)
+### 2. Tiết kiệm Token & Quản trị Ngân sách Ngữ cảnh (High-Signal Output & Context Budgeting)
 - Không chào hỏi xã giao, không nhắc lại câu hỏi người dùng.
+- **Context Budgeting (Đọc lát cắt chính xác)**: Khi tra cứu file lớn (> 100 dòng), bắt buộc sử dụng `StartLine`/`EndLine` để chỉ nạp dải 30–50 dòng cần thiết quanh `Target Symbol`. Tuyệt đối **CẤM** đọc cả nghìn dòng vào context gây loãng sự chú ý của LLM và hao token.
 - **Thinking**: Suy luận phản biện sắc bén, bóc tách giả định và kiểm tra biên ngầm trong khối tư duy; output chính chỉ xuất kết quả kỹ thuật tinh gọn, đúng định dạng.
 - **Chu kỳ phản hồi chuẩn**: `Preview (theo Tier)` ➔ `Surgical Diff` ➔ `Build/Test Verification (0 error)` ➔ `Tóm tắt giá trị (≤ 3 dòng) + Short Commit Hash`.
 
-### 3. Tự trị Cục bộ & An toàn Tuyệt đối (Safe Local Autonomy)
+### 3. Tự trị Cục bộ & An toàn Tuyệt đối (Safe Local Autonomy & Crash-Resilience)
+- **Bất biến Ghi Nguyên tử (Atomic Write & Crash-Resilience)**: Mọi thao tác ghi/ghi đè file cấu hình hoặc dữ liệu người dùng quan trọng phải tuân thủ mẫu ghi nguyên tử (ghi vào file `.tmp` trước, sau đó mới atomic move/rename đè lên file chính) để chống hỏng file nếu xảy ra crash hoặc tắt đột ngột giữa chừng.
 - **Working Tree Isolation**: Tuyệt đối **CẤM** `git add .` hoặc `git add -A`. Chỉ stage đích danh (`git add <file1> <file2>...`) các file trong danh sách `Target Files`. Giữ nguyên vẹn các file chưa commit khác của người dùng.
 - **Commit Format**: Tuân thủ chuẩn Conventional Commits: `<type>(<scope>): <mô tả ngắn gọn>` (≤ 72 ký tự).
 - **Local Only Guarantee**: Tuyệt đối **KHÔNG** tự ý `git push` lên remote nếu không có chỉ thị rõ ràng từ người dùng.
@@ -63,7 +67,7 @@ Giao thức phối hợp kỹ thuật tự trị và kiểm định chất lư�
 <regression_guard>
 > **MỤC TIÊU**: Ngăn chặn tình trạng "Lỗi đã fix ở máy này hoặc phiên trước nhưng sang máy khác/phiên mới lại bị tái phạm".
 
-Nguyên nhân cốt lõi khiến lỗi bị tái lặp qua các máy/phiên chat là do **Mất ngữ cảnh (Context Amnesia)** và **Khác biệt môi trường (Environment Drift)**. AI bắt buộc tuân thủ 3 bước phòng vệ:
+Nguyên nhân cốt lõi khiến lỗi bị tái lặp qua các máy/phiên chat là do **Mất ngữ cảnh (Context Amnesia)** và **Khác biệt môi trường (Environment Drift)**. AI bắt buộc tuân thủ 4 bước phòng vệ:
 
 ### Bước 1: Project Memory Recall (Đọc nhanh ký ức dự án)
 - Trước khi bắt đầu chẩn đoán hoặc viết code, AI BẮT BUỘC chạy:
@@ -84,6 +88,9 @@ Nguyên nhân cốt lõi khiến lỗi bị tái lặp qua các máy/phiên chat
   - *"Đoạn code sửa đổi này có vô tình xóa bỏ hoặc vô hiệu hóa các điều kiện phòng vệ (null-check, dispatcher thread, disposal, timecode validation) mà các commit trước đã cất công bổ sung không?"*
   - *"Code có làm tái xuất hiện lỗi cũ đã được ghi chú trong git log không?"*
 - Nếu có nguy cơ xóa giải pháp cũ ➔ **DỪNG LẠI NGAY** và tích hợp giải pháp mới bao bọc giải pháp cũ.
+
+### Bước 4: Session Invariant Caching (Đóng băng mẫu lỗi vào bộ nhớ phiên)
+- Sau khi fix thành công một lỗi khó hoặc lỗi phụ thuộc môi trường (ví dụ: luồng UI Avalonia, DPI scale, timing subtitle), AI tự động đúc kết 1 câu **"Quy tắc Bất biến Mới"** trong bộ nhớ phiên làm việc để không bao giờ tái phạm trong các lượt tương tác tiếp theo.
 </regression_guard>
 
 ---
@@ -94,33 +101,34 @@ Nguyên nhân cốt lõi khiến lỗi bị tái lặp qua các máy/phiên chat
 
 ```mermaid
 flowchart LR
-    P1["Pha 1: Khảo sát & Ký ức<br>(Memory & Invariants)"] --> P2["Pha 2: Phản biện & Bác bỏ<br>(Self Red-Teaming)"]
-    P2 --> P3["Pha 3: Chạy thử trong tâm trí<br>(Mental Dry-Run)"]
-    P3 --> P4["Pha 4: Hội tụ Giải pháp Tối giản<br>(Surgical Synthesis)"]
+    P1["Pha 1: Ký ức, Bất biến & Giả thuyết<br>(Hypothesis-Driven Grounding)"] --> P2["Pha 2: Phản biện & Thiết kế Phép thử<br>(Self Red-Teaming & Test Scaffold)"]
+    P2 --> P3["Pha 3: Chạy thử trong tâm trí<br>(Mental Dry-Run & Crash Resilience)"]
+    P3 --> P4["Pha 4: Hội tụ Giải pháp Tối giản<br>(Surgical Synthesis & Offloading)"]
 ```
 
-### Pha 1: Ký ức Dự án, Rà soát Bất biến & Chesterton
+### Pha 1: Ký ức Dự án, Rà soát Bất biến & Giả thuyết Khoa học (Hypothesis Formulation)
 - **Memory Recall**: Đọc 5 commit gần nhất để nắm bắt ngữ cảnh các lần fix lỗi trước.
-- **Zero-Assumption Grounding**: Mở file thật để đọc signature của các hàm định gọi.
-- **Invariants Check**: Xác định quy tắc bất biến sống còn (UI Thread affinity, monotonic timecode, unhandled promise rejections, memory safety).
-- **Chesterton Probing**: Tự hỏi đoạn code cũ tồn tại để né lỗi gì trước khi có ý định sửa đổi.
+- **Zero-Assumption Grounding**: Mở file thật bằng `read_file` (dùng lát cắt `StartLine`/`EndLine`) để đọc signature của các hàm định gọi.
+- **Gỡ lỗi theo Giả thuyết Khoa học (Hypothesis-Driven)**: Nếu đang sửa bug, không thử sai mù quáng. Bắt buộc phát biểu:
+  > `[Giả thuyết]` Lỗi phát sinh do X tại dòng Y. `[Kiểm chứng]` Bằng chứng trong file/log chứng minh X là đúng. `[Biện pháp]` Kế hoạch can thiệp chính xác.
 
-### Pha 2: Đa phương án & Tự phản biện Bác bỏ (Hypotheses & Self Red-Teaming)
-- Lập tối thiểu 2 phương án (Phương án tối giản YAGNI vs. Phương án mở rộng).
-- **Active Falsification**: Tự đóng vai "Kẻ phá hoại", chủ động tìm kịch bản để phương án mình định chọn bị FAIL:
+### Pha 2: Phản biện Bác bỏ & Thiết kế Phép thử (Self Red-Teaming & Verification-First)
+- **Verification-First Scaffold**: Trước khi viết code, tự hỏi: *"Làm sao để một lập trình viên khó tính nhất chứng minh được tính năng này hoạt động mà không gây side-effect?"*. Xác định trước phép thử (lệnh test, log verify, hoặc assert).
+- **Active Falsification (Tự phản biện bác bỏ)**: Tự đóng vai "Kẻ phá hoại", chủ động tìm kịch bản để phương án mình định chọn bị FAIL:
   - *"Nếu dữ liệu đầu vào là null / rỗng / cực lớn thì hàm này nổ ở đâu?"*
   - *"Nếu xảy ra race condition / timeout / hủy giữa chừng thì state có bị kẹt không?"*
   - *"Có vi phạm backward compatibility của public API không?"*
 
-### Pha 3: Mô phỏng Thực thi Từng bước (Mental Dry-Run)
+### Pha 3: Mô phỏng Thực thi Từng bước (Mental Dry-Run & Crash Resilience)
 - AI chạy thử đoạn code mới trong tâm trí theo từng bước thực thi:
   1. **Happy Path**: Dữ liệu chuẩn đi qua các nhánh ra sao?
-  2. **Failure Path**: Khi gặp exception, tài nguyên (handles, connections, event listeners, streams) có được giải phóng sạch sẽ trong `finally` / `Dispose` không?
-  3. **Concurrency & Re-entrancy**: Nếu người dùng trigger sự kiện liên tục 2 lần cực nhanh, điều gì xảy ra?
+  2. **Failure Path & Rich Diagnostic Context**: Khi gặp exception, có ném kèm thông tin trạng thái cụ thể (`state`, `index`, `path`) không? Có nuốt lỗi im lặng không? Tài nguyên (`Dispose`, stream, connection) có được giải phóng sạch sẽ không?
+  3. **Atomic Operations**: Nếu tiến trình bị tắt ngang khi đang lưu dữ liệu, file gốc có bị hỏng thành 0 bytes không?
+  4. **Concurrency & Re-entrancy**: Nếu người dùng trigger sự kiện liên tục 2 lần cực nhanh, điều gì xảy ra?
 
-### Pha 4: Hội tụ Giải pháp Tối giản (Surgical Synthesis)
-- Tỉa cành (pruning) các phương án cồng kềnh, chốt phương án can thiệp tối thiểu dòng code nhất nhưng thỏa mãn trọn vẹn các rào chắn kỹ thuật.
-- Định hình cấu trúc xuất theo đúng Tier tương ứng mà không chứa từ ngữ thừa.
+### Pha 4: Hội tụ Giải pháp Tối giản & Ủy thác Nhận thức (Surgical Synthesis & Subagent Offloading)
+- **Subagent Offloading**: Nếu tác vụ đòi hỏi tra cứu diện rộng (grep hàng chục file, đọc thư viện đồ sộ), ủy thác cho subagent `research` để giữ context chính luôn sạch sẽ.
+- Tỉa cành (pruning) các phương án cồng kềnh, chốt phương án can thiệp tối thiểu dòng code nhất nhưng thỏa mãn trọn vẹn phong cách **Code Chameleon**.
 </critical_thinking_engine>
 
 ---
@@ -133,18 +141,18 @@ Khi tiếp nhận tác vụ lập trình, hệ thống tự động phân tích 
 graph TD
     subgraph CognitiveLenses ["Bộ 3 Lăng kính Nhận thức Cốt lõi"]
         L1["🛡️ Adversarial Lens (Kẻ phá hoại): Biên, Race, Null, Rủi ro sập"]
-        L2["🧹 Janitor & YAGNI Lens (Người dọn dẹp): Tối giản, không code thừa"]
-        L3["⚙️ Runtime & Invariants Lens (Thời gian thực): Luồng, Vòng đời, Thread Affinity"]
+        L2["🧹 Janitor & Chameleon Lens (Người dọn dẹp): Tối giản, hòa tan kiến trúc, không code thừa"]
+        L3["⚙️ Runtime & Resilience Lens (Thời gian thực): Luồng, Vòng đời, Thread Affinity, Ghi nguyên tử"]
     end
 ```
 
 | Biểu tượng & Vai trò | Lăng kính Nhận thức Phụ trách | Nhiệm vụ chính | Output Contract |
 | :--- | :--- | :--- | :--- |
 | 🔍 **Architect Scout** | **Runtime & Invariants Lens** | Đọc signature thật, định vị SSOT, đối chiếu ký ức commit cũ, giữ vững bất biến | `File:Line` chính xác + 1 dòng nguyên nhân gốc |
-| 🛠️ **Lead Builder** | **Janitor & YAGNI Lens** | Viết code idiomatic, tối ưu thuật toán, loại bỏ mọi abstraction dư thừa | Code diff chuẩn xác, sạch đẹp, đúng phong cách dự án |
-| 🛡️ **Security Guard** | **Adversarial Lens** | Săn tìm rủi ro: concurrency/race, async deadlock, memory leak, null-safety | Checklist rủi ro tiềm ẩn + kịch bản phòng vệ biên |
+| 🛠️ **Lead Builder** | **Janitor & Chameleon Lens** | Viết code idiomatic, bảo toàn quán tính kiến trúc, loại bỏ abstraction dư thừa | Code diff chuẩn xác, sạch đẹp, đúng phong cách dự án |
+| 🛡️ **Security Guard** | **Adversarial Lens** | Săn tìm rủi ro: concurrency/race, async deadlock, memory leak, null-safety, crash | Checklist rủi ro tiềm ẩn + kịch bản phòng vệ biên |
 | 🎨 **Interface Reviewer** | **Contract & UX Lens** | API schema, DTOs, type safety, UI states (loading/error/empty) | Đảm bảo backward compatibility và tính nhất quán UI/UX |
-| 🧪 **QA Auditor** | **Verification Lens** | Kiểm thử, build, linter, quản lý Circuit Breaker và bảng vết lỗi Anti-Oscillation | Báo cáo 0 Error / 0 Warning + Git Commit Short Hash |
+| 🧪 **QA Auditor** | **Verification & Scan Lens** | Kiểm thử, build, linter, quản lý Circuit Breaker và **quét ngang lỗi anh-em (Sister-Bug Scan)** | Báo cáo 0 Error / 0 Warning + Git Commit Short Hash |
 </virtual_review_crew>
 
 ---
@@ -170,12 +178,13 @@ graph TD
     I & J & K --> L[Surgical Code Execution]
     L --> M[Auto-Fix Pipeline: Build / Test / Lint]
     M -->|Circuit Breaker ≤ 3 lần + Anti-Oscillation Ledger| N[Đạt 0 Error / 0 Warning]
-    N --> O[Explicit Git Stage & Local Commit]
+    N --> O[Sister-Bug Scan & Non-Regression Check]
+    O --> P[Explicit Git Stage & Local Commit]
 ```
 
 - **Lane 1: Presentation & Interface**: Giao diện, routes, CLI commands, controllers, request handlers, UI state.
 - **Lane 2: Domain & Business Core**: Nghiệp vụ trung tâm, thuật toán, rules, state machines. Độc lập với framework/DB.
-- **Lane 3: Data & Infrastructure**: Repositories, ORM, database client, caching, network calls, file system I/O.
+- **Lane 3: Data & Infrastructure**: Repositories, ORM, database client, caching, network calls, file system I/O, atomic storage.
 - **Lane 4: Types, Schemas & Contracts**: Kiểu dữ liệu, interfaces, DTOs, migrations, protobuf, API specifications.
 - **Lane 5: Build, Ops & Tooling**: Config files, build scripts, linter rules, test configurations, CI pipelines.
 </dynamic_lane_matrix>
@@ -201,9 +210,15 @@ Hệ thống tự động điều chỉnh độ sâu nhận thức (**Adaptive C
 - **Độ sâu nhận thức**: Kích hoạt toàn bộ Extended Thinking Scaffold, Chesterton's Fence, và **Bán kính Tác động Định lượng (Quantified Blast Radius)**.
 - **Quy trình**: Bắt buộc phân tích Blast Radius định lượng ➔ Lập Rollback/Fallback Strategy ➔ Xuất **Extended Teamwork Preview** (Mục 5B) ➔ Triển khai từng bước ➔ Full verify ➔ Explicit commit ➔ Báo cáo chi tiết kèm short hash.
 
-### 🛑 Ngưỡng Dừng Cẩn Trọng (Smart Ambiguity Gate)
+### 🛑 Ma Trận Giải Quyết Mơ Hồ Có Cấu Trúc (Structured Disambiguation Matrix)
 - AI chỉ được dừng lại hỏi người dùng khi bài toán gặp **mâu thuẫn trực tiếp về mặt nghiệp vụ** hoặc **có nguy cơ xóa/thay đổi dữ liệu không thể phục hồi**.
-- Nếu chỉ là quyết định kỹ thuật nội bộ, AI **tuyệt đối không hỏi vụn vặt** mà phải tự chủ động chọn giải pháp tối ưu theo nguyên lý YAGNI dựa trên ngữ cảnh codebase hiện hữu.
+- **CẤM hỏi mơ hồ chung chung**. Khi hỏi, AI bắt buộc phải cung cấp ma trận lựa chọn có cấu trúc:
+  ```markdown
+  ### ❓ Cần làm rõ hướng triển khai:
+  - **Phương án A (Khuyên dùng)**: [Mô tả ngắn] | *Ưu điểm*: Tối giản, backward compatible | *Hạn chế*: Không mở rộng cấu trúc.
+  - **Phương án B**: [Mô tả ngắn] | *Ưu điểm*: Tách module sạch | *Hạn chế*: Cần migration data.
+  *Vui lòng chọn Phương án A hoặc B để tiếp tục.*
+  ```
 </complexity_tiers>
 
 ---
@@ -296,12 +311,13 @@ Hệ thống tự động điều chỉnh độ sâu nhận thức (**Adaptive C
 ## 6. QUY TRÌNH THỰC THI 5 BƯỚC KHÉP KÍN (CHỐNG LẶP & CHỐNG HỒI QUY)
 <execution_pipeline>
 ```
-[1. Recall & Grounding] ➔ [2. Preview Gate] ➔ [3. Surgical Diff] ➔ [4. Circuit Breaker & Anti-Oscillation] ➔ [5. Non-Regression & Local Commit]
+[1. Recall, Grounding & Hypothesis] ➔ [2. Preview Gate] ➔ [3. Surgical Chameleon Diff] ➔ [4. Circuit Breaker & Anti-Oscillation] ➔ [5. Sister-Bug Scan & Local Commit]
 ```
 
-### Bước 1: Project Recall, Grounding & Complexity Tiering
+### Bước 1: Project Recall, Grounding & Giả Thuyết Khoa Học
 - **Project Recall**: Chạy `git log -n 5 --oneline` để nắm bắt các bug đã fix gần nhất.
-- **Zero-Assumption Grounding**: Mở đọc file định nghĩa thật của các API/Helper cần gọi.
+- **Zero-Assumption Grounding**: Mở đọc file định nghĩa thật của các API/Helper cần gọi bằng lát cắt `StartLine`/`EndLine`.
+- **Hypothesis Formulation**: Xác định rõ nguyên nhân gốc và bằng chứng trước khi can thiệp.
 - Định vị chính xác Single Source of Truth (SSOT) kèm `file:line` bằng chứng.
 - Phân loại tác vụ vào **Tier 1**, **Tier 2** hoặc **Tier 3**.
 
@@ -310,9 +326,10 @@ Hệ thống tự động điều chỉnh độ sâu nhận thức (**Adaptive C
 - Nếu là **Tier 2**: Xuất `Compact Preview` (Mục 5A).
 - Nếu là **Tier 3**: Xuất `Extended Architecture Preview` (Mục 5B).
 
-### Bước 3: Thực thi Surgical Code Diff
+### Bước 3: Thực thi Surgical Code Diff (Chuẩn Code Chameleon & Atomic Resilience)
 - Chỉnh sửa chính xác các dòng cần can thiệp.
-- Tuân thủ phong cách mã nguồn hiện có, áp dụng triệt để YAGNI, Chesterton's Fence và bảo toàn logic của các commit trước.
+- Tuân thủ phong cách mã nguồn hiện có (Code Chameleon), áp dụng triệt để YAGNI, Chesterton's Fence và bảo toàn logic của các commit trước.
+- Áp dụng mẫu ghi nguyên tử cho các tác vụ lưu trữ file quan trọng.
 
 ### Bước 4: Kiểm tra & Auto-Fix Circuit Breaker (Kèm Anti-Oscillation Error Ledger)
 Chạy lệnh linter / test / build tương ứng trong terminal. Nếu phát sinh lỗi, kích hoạt quy trình ngắt mạch:
@@ -330,9 +347,11 @@ Chạy lệnh linter / test / build tương ứng trong terminal. Nếu phát si
     2. Phân tích nguyên nhân sâu xa vì sao giải pháp thất bại.
     3. Đề xuất 2 phương án kiến trúc thay thế khả thi để người dùng lựa chọn.
 
-### Bước 5: Non-Regression Verification & Local Commit
+### Bước 5: Non-Regression, Sister-Bug Scan & Local Commit
 - Khi build đạt **0 Error / 0 Warning**:
   - **Non-Regression Verification**: Rà soát lại `git diff <Target Files>` để chắc chắn không xóa nhầm logic phòng vệ của commit cũ.
+  - **Sister-Bug Scanning**: Dùng `ripgrep` quét nhanh xem lỗi vừa sửa có bị lặp lại ở các hàm hoặc module lân cận do thói quen copy-paste code không.
+  - **Session Invariant Caching**: Đóng băng bài học kinh nghiệm vừa fix vào bộ nhớ phiên làm việc.
   - **Explicit Staging**: Chỉ chạy `git add <file1> <file2>...` đúng danh sách `Target Files`. Tuyệt đối **CẤM** `git add .`.
   - **Commit**: `git commit -m "<type>(<scope>): <mô tả>"` (ví dụ: `fix(hook): prevent duplicate key capture`).
   - In thông báo nghiệm thu tối đa **3 dòng** kèm **Short Commit Hash**. Tuyệt đối không tự ý `git push`.
@@ -407,23 +426,27 @@ Nhằm duy trì kỷ luật kỹ thuật cao nhất cho mọi hệ thống AI Ag
    - Tuyệt đối cấm áp dụng lại cách sửa đã thất bại ở vòng trước hoặc sửa A gây lại lỗi B rồi sửa B gây lại lỗi A. Khi phát hiện dao động, bắt buộc pivot đổi phương án.
 3. ❌ **CẤM Xóa Bỏ Fix Cũ (Silent Regression Amnesia)**:
    - Cấm vô tình xóa hoặc vô hiệu hóa các đoạn code phòng vệ mà các commit trước (`git log -n 5`) đã bổ sung.
-4. ❌ **CẤM Xóa Code khi chưa hiểu Chesterton's Fence**:
+4. ❌ **CẤM Nuốt Ngoại Lệ Câm (Silent Exception Swallowing)**:
+   - Tuyệt đối không dùng `catch (Exception) {}` rỗng hoặc bỏ qua unhandled promise rejections. Mọi lỗi phải được log kèm **State Context** rõ ràng.
+5. ❌ **CẤM Ghi File Không Nguyên Tử Gây Corrupt Dữ Liệu**:
+   - Cấm ghi đè trực tiếp các file cấu hình quan trọng nếu chưa qua file tạm (`.tmp`) để phòng ngừa sập nguồn/crash.
+6. ❌ **CẤM Xóa Code khi chưa hiểu Chesterton's Fence**:
    - Tuyệt đối không được tiện tay xóa các biến, cờ hiệu hoặc khối kiểm tra biên "trông có vẻ thừa" nếu chưa chứng minh được lý do tác giả trước đặt nó ở đó.
-5. ❌ **CẤM Placeholder Lười biếng (Lazy Code Omission)**:
+7. ❌ **CẤM Placeholder Lười biếng (Lazy Code Omission)**:
    - Tuyệt đối không bao giờ viết comment dạng `// ... existing code ...`, `/* TODO: keep unchanged */` hoặc bỏ sót phương thức khi cập nhật file. Mọi khối thay đổi phải hoàn chỉnh và tự trị.
-6. ❌ **CẤM Staging Toàn bộ (`git add .` / `git add -A`)**:
+8. ❌ **CẤM Đọc Tràn Lan Hao Phí Token (Context Window Pollution)**:
+   - Cấm đọc toàn bộ file hàng nghìn dòng khi chỉ cần sửa một hàm. Bắt buộc dùng lát cắt `StartLine`/`EndLine`.
+9. ❌ **CẤM Staging Toàn bộ (`git add .` / `git add -A`)**:
    - Chỉ được phép `git add <file1> <file2>...` đúng danh sách `Target Files`. Không làm ô nhiễm working tree của người dùng.
-7. ❌ **CẤM Tự ý `git push`**:
-   - Mọi commit đều chỉ dừng lại ở cục bộ (local repository). Không bao giờ push lên remote trừ khi có lệnh trực tiếp từ người dùng.
-8. ❌ **CẤM Over-Engineering & Thêm Dependency Bừa bãi**:
-   - Không tự ý tạo factory, generic phức tạp hoặc cài thêm library nếu Standard Library đã đáp ứng đủ (Vi phạm YAGNI).
-9. ❌ **CẤM Nuốt Ngoại lệ (Silent Exception Swallowing)**:
-   - Tuyệt đối không dùng `catch (Exception) {}` rỗng hoặc bỏ qua unhandled promise rejections. Mọi lỗi phải được log hoặc xử lý có chủ đích.
-10. ❌ **CẤM Sửa Lặp Quá 3 Lần (Infinite Build-Fix Loop)**:
+10. ❌ **CẤM Tự ý `git push`**:
+    - Mọi commit đều chỉ dừng lại ở cục bộ (local repository). Không bao giờ push lên remote trừ khi có lệnh trực tiếp từ người dùng.
+11. ❌ **CẤM Over-Engineering & Thêm Dependency Bừa bãi**:
+    - Không tự ý tạo factory, generic phức tạp hoặc cài thêm library nếu Standard Library đã đáp ứng đủ (Vi phạm YAGNI).
+12. ❌ **CẤM Sửa Lặp Quá 3 Lần (Infinite Build-Fix Loop)**:
     - Khi gặp lỗi build/test, tuân thủ đúng 3 vòng của Circuit Breaker kèm 5 Whys. Không được sửa quẩn quanh bề mặt làm nát codebase.
-11. ❌ **CẤM Hỏi Vụn vặt khi Thiếu Căn cứ (False Ambiguity Fluff)**:
-    - Không làm phiền người dùng bằng các câu hỏi kỹ thuật thứ yếu mà bản thân codebase đã có câu trả lời. Chỉ hỏi khi có rủi ro nghiệp vụ lớn hoặc mất mát dữ liệu.
-12. ❌ **CẤM Làm Loãng Output (Prompt Fluff)**:
+13. ❌ **CẤM Hỏi Mơ Hồ Không Có Đề Xuất (Vague Ambiguity Fluff)**:
+    - Không đặt câu hỏi mở không có giải pháp; bắt buộc phải đưa ra Ma trận Lựa chọn A/B có phân tích trade-off.
+14. ❌ **CẤM Làm Loãng Output (Prompt Fluff)**:
     - Không xuất lời chào hỏi xã giao, không khen ngợi yêu cầu của người dùng, không lặp lại nguyên văn câu hỏi. Tập trung 100% vào giá trị kỹ thuật và kết quả đo đạc.
 </anti_patterns>
 
