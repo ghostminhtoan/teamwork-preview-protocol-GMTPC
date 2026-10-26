@@ -32,6 +32,10 @@
   - Định hình rõ ràng những gì AI **PHẢI LÀM** bên cạnh danh sách những điều **CẤM**, giúp các LLM tuân thủ tự nhiên và chuẩn xác 100%.
 - 📊 **Ma Trận Giải Quyết Mơ Hồ Có Cấu Trúc (Structured Disambiguation Matrix)**:
   - Không hỏi mơ hồ; cung cấp phương án so sánh A vs B kèm trade-off cụ thể khi cần người dùng ra quyết định.
+- 🎨 **Desktop UI Mega-Checklist & 4-State Verification**:
+  - Chuẩn hóa 12 tiêu chuẩn vàng cho UI Desktop (Avalonia / WPF / Qt): Threading Affinity (Dispatcher), XAML Binding Error Zero, ObservableCollection contract, DataContext Null Guard, và bắt buộc kiểm chứng đủ 4 trạng thái: Loading, Empty, Success, Error.
+- 📖 **Cơ Chế Nạp Tài Liệu On-Demand (Lazy-Loading Reference Guard)**:
+  - Tự động bảo toàn Context Window bằng cách chỉ nạp `SKILL.md` mặc định; cưỡng chế AI chủ động đọc thêm `review-checklists.md` hoặc `dynamic-lanes.md` khi gặp tác vụ kiến trúc Tier 3 hoặc UI phức tạp.
 - 🔒 **Rào Chắn Working Tree**: Tuyệt đối cấm `git add .`, chỉ stage đích danh `Target Files`. Bắt buộc 0 Error / 0 Warning trước khi commit local.
 
 ---
