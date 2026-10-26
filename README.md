@@ -34,8 +34,8 @@
   - Không hỏi mơ hồ; cung cấp phương án so sánh A vs B kèm trade-off cụ thể khi cần người dùng ra quyết định.
 - 🎨 **Desktop UI Mega-Checklist & 4-State Verification**:
   - Chuẩn hóa 12 tiêu chuẩn vàng cho UI Desktop (Avalonia / WPF / Qt): Threading Affinity (Dispatcher), XAML Binding Error Zero, ObservableCollection contract, DataContext Null Guard, và bắt buộc kiểm chứng đủ 4 trạng thái: Loading, Empty, Success, Error.
-- 📖 **Cơ Chế Nạp Tài Liệu On-Demand (Lazy-Loading Reference Guard)**:
-  - Tự động bảo toàn Context Window bằng cách chỉ nạp `SKILL.md` mặc định; cưỡng chế AI chủ động đọc thêm `review-checklists.md` hoặc `dynamic-lanes.md` khi gặp tác vụ kiến trúc Tier 3 hoặc UI phức tạp.
+- 📖 **Cơ Chế Nạp Tài Liệu On-Demand & Absolute Path Cross-Project**:
+  - Tự động bảo toàn Context Window bằng cách chỉ nạp `SKILL.md` mặc định. Khi gặp tác vụ Tier 3 hoặc UI phức tạp, AI tự động dùng **đường dẫn tuyệt đối toàn cục** (`C:/Users/Admin/.gemini/config/skills/teamwork-preview-protocol/references/...`) để mở tài liệu, đảm bảo không bao giờ bị lỗi sai thư mục làm việc dù được gọi ở bất kỳ project folder nào.
 - 🔒 **Rào Chắn Working Tree**: Tuyệt đối cấm `git add .`, chỉ stage đích danh `Target Files`. Bắt buộc 0 Error / 0 Warning trước khi commit local.
 
 ---

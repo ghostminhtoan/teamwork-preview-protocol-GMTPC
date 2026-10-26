@@ -111,7 +111,10 @@ flowchart LR
 ### Pha 0: Explore Read-Only (Khảo sát thuần túy — KHÔNG sửa file)
 - Chuyển sang chế độ đọc thuần túy: `git log`, `read_file`, `ripgrep` để nắm bắt toàn cảnh.
 - Đọc 5 commit gần nhất. Mở file thật bằng `read_file` (lát cắt `StartLine`/`EndLine`) để đọc signature các hàm cần gọi.
-- **Lazy-Loading Reference Guard (Nạp tài liệu On-Demand)**: Khi gặp tác vụ **Tier 3** hoặc thiết kế **Desktop UI phức tạp**, AI **BẮT BUỘC** dùng công cụ `read_file` mở thêm [review-checklists.md](./references/review-checklists.md) (hoặc [dynamic-lanes.md](./references/dynamic-lanes.md)) để nạp sâu các tiêu chí kiểm tra, tuyệt đối không phỏng đoán.
+- **Lazy-Loading Reference Guard (Nạp tài liệu On-Demand qua Absolute Path)**: Khi gặp tác vụ **Tier 3** hoặc thiết kế **Desktop UI phức tạp**, AI **BẮT BUỘC** dùng công cụ `read_file` với **đường dẫn tuyệt đối (Absolute Path)** để mở tài liệu phụ trợ, đảm bảo hoạt động chính xác ở **MỌI project folder**:
+  - `review-checklists.md`: `C:/Users/Admin/.gemini/config/skills/teamwork-preview-protocol/references/review-checklists.md`
+  - `dynamic-lanes.md`: `C:/Users/Admin/.gemini/config/skills/teamwork-preview-protocol/references/dynamic-lanes.md`
+  *(Nếu project có thư mục `.agents/skills/teamwork-preview-protocol/references/` thì có thể dùng đường dẫn nội bộ dự án, ngược lại LUÔN dùng đường dẫn tuyệt đối toàn cục trên).*
 - **Tuyệt đối CẤM sửa code trong pha này.**
 
 ### Pha 1: Giả thuyết Khoa học & Rà soát Bất biến
@@ -188,7 +191,7 @@ flowchart LR
 ### 🔴 Tier 3: Architectural / Breaking Change
 - **Điều kiện**: ≥ 4 files, HOẶC thay đổi Contract/Schema/Migration/Security/Concurrency.
 - **Cognitive Depth**: Full Extended Thinking + Quantified Blast Radius.
-- **Deep Reference Requirement**: Bắt buộc dùng `read_file` đọc [review-checklists.md](./references/review-checklists.md) và đối chiếu kiến trúc qua [dynamic-lanes.md](./references/dynamic-lanes.md).
+- **Deep Reference Requirement**: Bắt buộc dùng `read_file` đọc theo đường dẫn tuyệt đối toàn cục: `C:/Users/Admin/.gemini/config/skills/teamwork-preview-protocol/references/review-checklists.md` và `C:/Users/Admin/.gemini/config/skills/teamwork-preview-protocol/references/dynamic-lanes.md`.
 - **Flow**: Blast Radius ➔ Rollback Strategy ➔ Extended Preview (5B) ➔ Từng bước ➔ Full verify ➔ Commit chi tiết.
 
 ### 🛑 Structured Disambiguation Matrix
@@ -448,6 +451,6 @@ Build sạch. Commit local: `a2c5f8d` - `feat(ui): add chapter list with 4-state
 ---
 
 ## 📚 TÀI LIỆU THAM KHẢO & CƠ CHẾ LAZY-LOADING (ON-DEMAND)
-> **Quy tắc nạp tài liệu**: Để bảo toàn Context Window, hệ thống chỉ nạp `SKILL.md` mặc định. Các tài liệu phụ trợ dưới đây chỉ được nạp theo nhu cầu (On-Demand) bằng công cụ `read_file`:
-- [Dynamic Lanes Guide](./references/dynamic-lanes.md): *BẮT BUỘC mở khi phân rã module lớn, tái cấu trúc Monorepo hoặc Clean Architecture.*
-- [Review Checklists](./references/review-checklists.md): *BẮT BUỘC mở khi làm tác vụ Tier 3 hoặc thiết kế/refactor màn hình Desktop UI phức tạp.*
+> **Quy tắc nạp tài liệu cho MỌI project**: Để bảo toàn Context Window, hệ thống chỉ nạp `SKILL.md` mặc định. Các tài liệu phụ trợ dưới đây **BẮT BUỘC gọi bằng đường dẫn tuyệt đối (Absolute Path)** khi dùng tool `read_file` để đảm bảo định vị chính xác ở bất kỳ project folder nào:
+- **[Dynamic Lanes Guide](file:///C:/Users/Admin/.gemini/config/skills/teamwork-preview-protocol/references/dynamic-lanes.md)** (`C:/Users/Admin/.gemini/config/skills/teamwork-preview-protocol/references/dynamic-lanes.md`): *BẮT BUỘC mở khi phân rã module lớn, tái cấu trúc Monorepo hoặc Clean Architecture.*
+- **[Review Checklists](file:///C:/Users/Admin/.gemini/config/skills/teamwork-preview-protocol/references/review-checklists.md)** (`C:/Users/Admin/.gemini/config/skills/teamwork-preview-protocol/references/review-checklists.md`): *BẮT BUỘC mở khi làm tác vụ Tier 3 hoặc thiết kế/refactor màn hình Desktop UI phức tạp.*
