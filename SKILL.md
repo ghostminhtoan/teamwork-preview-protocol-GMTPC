@@ -9,7 +9,9 @@ description: >
   Hypothesis-Driven Scientific Debugging, Sister-Bug Horizontal Scanning, Atomic Operations & Crash-Resilience,
   Code Chameleon & Architectural Inertia, Verification-First Scaffold, Rich Diagnostic Context, Context Budgeting,
   Structured Disambiguation Matrix, Subagent Cognitive Offloading, Session Invariant Caching, 3 Lăng kính Nhận thức,
-  Adaptive Cognitive Depth (Tier 1/2/3), Auto-Fix Circuit Breaker với 5 Whys Root-Cause, Canonical Few-Shot Examples
+  Adaptive Cognitive Depth (Tier 1/2/3), Auto-Fix Circuit Breaker với 5 Whys Root-Cause,
+  Desktop UI Mega-Checklist (4-State UI, Data Binding Contract, XAML Binding Error Zero, Visual Regression Guard),
+  Dependency Graph Awareness, Progressive Refinement Gate, Canonical Few-Shot Examples
   và Hard Anti-Patterns. Bắt buộc 0 Error/0 Warning trước khi commit local.
   Trigger khi: "teamwork preview", "hội đồng review", "review code", "teamwork code",
   "đội ngũ review", "chia việc review", "multi-role review", "kiểm duyệt code", "code preview",
@@ -132,6 +134,8 @@ flowchart LR
 4. **Concurrency & Re-entrancy**: Trigger liên tục 2 lần cực nhanh → điều gì xảy ra?
 
 ### Pha 4: Hội tụ Giải pháp Tối giản
+- **Dependency Graph Awareness**: Trước khi sửa hàm X, **BẮT BUỘC** `ripgrep` tất cả callers trực tiếp (`rg "X(" --type cs -l`) để đánh giá blast radius thực tế. Nếu >5 callers → đánh dấu Tier 3.
+- **Progressive Refinement Gate**: Nếu diff dự kiến >50 dòng hoặc ≥3 files → **BẮT BUỘC** chia thành micro-commits có kiểm soát: mỗi commit ≤30 dòng diff, build pass sau mỗi commit. CẤM "big bang refactor" một lượt.
 - **Subagent Offloading**: Tra cứu diện rộng → ủy thác cho subagent `research`.
 - Tỉa cành phương án cồng kềnh, chốt can thiệp tối thiểu dòng code theo phong cách Code Chameleon.
 - **Backtracking Gate**: Nếu sau Pha 3 phát hiện giải pháp có lỗ hổng nghiêm trọng → quay lại Pha 1 thay vì ép code sai. Tuyệt đối CẤM "cố đấm ăn xôi".
@@ -147,7 +151,7 @@ flowchart LR
 | 🔍 **Architect Scout** | Runtime & Invariants | Đọc signature thật, SSOT, đối chiếu commit cũ, giữ bất biến | `File:Line` + 1 dòng nguyên nhân gốc |
 | 🛠️ **Lead Builder** | Janitor & Chameleon | Code idiomatic, bảo toàn quán tính kiến trúc, loại bỏ abstraction thừa | Diff sạch đúng phong cách dự án |
 | 🛡️ **Security Guard** | Adversarial | Concurrency/race, deadlock, memory leak, null-safety, crash | Checklist rủi ro + kịch bản phòng vệ |
-| 🎨 **Interface Reviewer** | Contract & UX | API schema, DTOs, type safety, UI states | Backward compatibility & UX nhất quán |
+| 🎨 **Interface Reviewer** | Contract & UX | API schema, DTOs, type safety, **4-State UI** (Loading/Empty/Success/Error), Data Binding Contract | Backward compatibility & UX nhất quán |
 | 🧪 **QA Auditor** | Verification & Scan | Build, test, Circuit Breaker, **Sister-Bug Scan** | 0 Error / 0 Warning + Short Hash |
 </virtual_review_crew>
 
@@ -217,10 +221,30 @@ flowchart LR
 | Profile | Focus Areas |
 | :--- | :--- |
 | **A: Systems (C/C++/Rust/Go)** | Memory/Lifetime, Data race `-race`, Buffer overflow, `unsafe` cô lập |
-| **B: Desktop UI (Avalonia/WPF/Qt/Electron)** | Threading Affinity (UI Dispatcher), Lifecycle/Dispose, DPI/OS compat |
+| **B: Desktop UI (Avalonia/WPF/Qt/Electron)** | *(Xem B.Extended bên dưới — checklist 12 điểm)* |
 | **C: Web Backend (Node/FastAPI/Spring/.NET)** | Input sanitization, Timeout/Pooling, Idempotency, Graceful shutdown |
 | **D: Web Frontend (React/Vue/Svelte)** | Re-render cascade, AbortController cleanup, A11y & UI states |
 | **E: Mobile (Flutter/RN/Swift/Kotlin)** | Main thread 60fps, Battery/Offline cache, Process kill recovery |
+
+### 4.3. Profile B Extended: Desktop UI Mega-Checklist (Avalonia / WPF / Qt / Electron)
+<desktop_ui_checklist>
+
+| # | Hạng mục | Kiểm tra bắt buộc |
+| :--- | :--- | :--- |
+| B1 | **Threading Affinity** | Mọi thao tác UI (update control, show dialog) **BẮT BUỘC** chạy trên UI Thread (`Dispatcher.UIThread.Post`, `InvokeAsync`). Background task CẤM truy cập control trực tiếp. |
+| B2 | **Lifecycle & Dispose** | Window/UserControl phải `Dispose` timer, event subscription, stream. Kiểm tra `Loaded`/`Unloaded` event có cân bằng subscribe/unsubscribe. |
+| B3 | **4-State UI Verification** | Mọi view có data phải kiểm tra đủ **4 trạng thái**: ① `Loading` (spinner/skeleton) ② `Empty` (thông báo "Không có dữ liệu") ③ `Success` (hiển thị data) ④ `Error` (thông báo lỗi + retry). CẤM chỉ code happy path. |
+| B4 | **Data Binding Contract** | ViewModel property phải có `RaisePropertyChanged` / `[ObservableProperty]`. Collection phải dùng `ObservableCollection<T>`. CẤM gán `List<T>` rồi kỳ vọng UI tự cập nhật. |
+| B5 | **XAML Binding Error Zero** | Sau khi sửa UI, chạy debug và kiểm tra Output window: **0 Binding Error**. Binding path sai = bug ẩn nghiêm trọng. |
+| B6 | **DataContext Null Guard** | Trước khi truy cập `DataContext as T`, kiểm tra null. `Loaded` event có thể fire khi `DataContext` chưa gán. |
+| B7 | **DPI & Multi-Monitor** | Dùng device-independent units. CẤM hardcode pixel. Test trên 100%, 125%, 150% DPI. |
+| B8 | **Keyboard & Focus** | Tab order logic (không nhảy lung tung). Phím tắt (Ctrl+S, Enter, Esc) hoạt động đúng. `IsDefault` / `IsCancel` cho dialog buttons. |
+| B9 | **Component Consistency** | Component mới phải dùng cùng Style/Theme/Brush với component hiện có. CẤM tạo style riêng khi đã có style toàn cục. Kiểm tra `App.axaml` / `Styles.axaml` trước. |
+| B10 | **Navigation Flow** | Chuyển màn hình A→B→C phải logic. Nút Back/Cancel quay về đúng vị trí. Dialog modal không tạo dead-end. |
+| B11 | **Visual Regression Guard** | Khi sửa Margin/Padding/Size của container → kiểm tra tất cả children component có bị vỡ layout không. Thay đổi `Grid.RowDefinitions` → rà soát toàn bộ `Grid.Row` assignments. |
+| B12 | **Platform-Specific Gotchas** | **Avalonia**: `CompiledBinding` strict mode, `x:DataType` bắt buộc. **WPF**: `Freezable` cho Brush/Animation, `VirtualizingStackPanel` cho ListView lớn. **Electron**: IPC message serialization, process isolation. |
+
+</desktop_ui_checklist>
 </deep_stack_profiles>
 
 ---
@@ -369,6 +393,26 @@ Phát hiện: `MakeComboBox` nhận 3 tham số (string label, ComboBox comboBox
 - **Phương án A (Khuyên dùng)**: Mã hóa qua Standard Crypto Library.
 - **Phương án B**: Build SQLCipher từ source tĩnh.
 ```
+
+### Ví dụ 6: Desktop UI — 4-State & Data Binding Check
+*Bối cảnh: Thêm danh sách chapter trong Avalonia UserControl.*
+```markdown
+### 📋 [Teamwork Preview]
+- **Tech Stack & Lanes**: .NET / Avalonia | Lane 1 (Presentation)
+- **Target Files**:
+  - `Views/ChapterListView.axaml`: ListBox + 4-State layout (Loading/Empty/Success/Error)
+  - `ViewModels/ChapterListViewModel.cs`: ObservableCollection + IsLoading/ErrorMessage props
+- **Review Guard**:
+  - 🛡️ *Adversarial*: DataContext null guard trong Loaded. Dispatcher.UIThread cho async load.
+  - 🎨 *4-State UI*: ✅ Loading (ProgressBar), ✅ Empty (TextBlock "Không có chapter"), ✅ Success (ListBox), ✅ Error (TextBlock + Retry Button)
+  - 🎨 *Binding Contract*: RaisePropertyChanged cho IsLoading, ErrorMessage. ObservableCollection<ChapterItem>.
+  - 🎨 *Style Consistency*: Dùng StaticResource từ App.axaml, không tạo inline style.
+  - 🔗 *Blast Radius*: Cô lập — view mới, không ảnh hưởng view cũ.
+- **QA**: `dotnet build` ➔ 0 Error / 0 Warning. Debug: 0 Binding Error.
+
+Build sạch. Commit local: `a2c5f8d` - `feat(ui): add chapter list with 4-state handling`.
+```
+
 </canonical_examples>
 
 ---
@@ -393,6 +437,10 @@ Phát hiện: `MakeComboBox` nhận 3 tham số (string label, ComboBox comboBox
 | 13 | **Hỏi mơ hồ** | CẤM hỏi không có đề xuất A/B. |
 | 14 | **Output thừa** | CẤM chào hỏi, khen ngợi, lặp lại câu hỏi. |
 | 15 | **Cố đấm ăn xôi** | CẤM tiếp tục code khi đã nhận ra giả thuyết sai. Phải backtrack về Pha 1. |
+| 16 | **UI chỉ có happy path** | CẤM chỉ code Success state. Phải kiểm tra Loading/Empty/Error (4-State). |
+| 17 | **Binding path sai mà bỏ qua** | CẤM bỏ qua Binding Error trong Output window. Binding sai = bug ẩn. |
+| 18 | **Update UI từ background thread** | CẤM truy cập control từ non-UI thread. Phải dùng Dispatcher. |
+| 19 | **Big bang refactor** | CẤM diff >50 dòng trong 1 commit. Chia micro-commits, build pass mỗi bước. |
 </anti_patterns>
 
 ---

@@ -48,9 +48,21 @@ Bộ tiêu chí chi tiết cho từng vai trò trong **Hội đồng Review Ảo
 - [ ] **Serialization / Schema**: JSON field names, camelCase / snake_case có nhất quán giữa frontend và backend không?
 
 ### B. User Experience & Giao Diện
-- [ ] **Loading & Empty States**: Khi dữ liệu đang tải hoặc danh sách rỗng, UI có hiển thị thông báo rõ ràng không?
+- [ ] **4-State UI Verification**: Mọi view có data phải có đủ 4 trạng thái: ① Loading (spinner/skeleton) ② Empty ("Không có dữ liệu") ③ Success (hiển thị data) ④ Error (thông báo lỗi + retry action).
 - [ ] **Error Feedback**: Khi gặp sự cố mạng hoặc lỗi logic, người dùng có nhận được thông điệp lỗi dễ hiểu thay vì màn hình trắng / crash không?
 - [ ] **Responsive & Accessibility**: Giao diện có hoạt động ổn định trên nhiều kích thước màn hình không?
+
+### C. Desktop UI Specific (Avalonia / WPF / Qt / Electron)
+- [ ] **Threading Affinity**: Mọi UI update chạy trên UI Thread (Dispatcher)? Background task có dùng `InvokeAsync` / `Post` trước khi chạm control?
+- [ ] **Data Binding Contract**: ViewModel property có `RaisePropertyChanged`? Collection dùng `ObservableCollection<T>`? Có `[ObservableProperty]` nếu dùng CommunityToolkit?
+- [ ] **XAML Binding Error Zero**: Output window không có Binding Error nào?
+- [ ] **DataContext Null Guard**: `DataContext as T` có kiểm tra null trước khi dùng?
+- [ ] **Component Style Consistency**: Component mới dùng cùng Style/Theme/Brush hiện có? Đã kiểm tra `App.axaml` / `Styles.axaml` trước khi tạo style mới?
+- [ ] **Navigation Flow**: Chuyển màn hình logic? Nút Back/Cancel đúng? Dialog không tạo dead-end?
+- [ ] **Keyboard & Focus**: Tab order logic? Phím tắt (Ctrl+S, Enter, Esc) hoạt động? `IsDefault`/`IsCancel` cho dialog?
+- [ ] **DPI & Multi-Monitor**: Dùng device-independent units? Không hardcode pixel?
+- [ ] **Visual Regression**: Sửa container layout có kiểm tra children component không bị vỡ?
+- [ ] **Lifecycle & Dispose**: Timer, event subscription, stream được dispose trong `Unloaded` / `OnClosing`?
 
 ---
 
